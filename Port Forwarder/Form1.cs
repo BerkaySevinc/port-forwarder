@@ -20,67 +20,54 @@ namespace Port_Forwarder
         }
 
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-
-        }
-
-
-
-
-
-        int Port;
+        private int targetPort;
+        
+        // Forwards port.
         private void btnForward_Click(object sender, EventArgs e)
         {
-            string PortText = txtPort.Text.Trim();
+            string portText = txtPort.Text.Trim();
 
-            if (!Int32.TryParse(PortText, out _)) return;
-
-            Port = Convert.ToInt32(PortText);
+            if (!int.TryParse(portText, out targetPort)) return;
 
             NatUtility.DeviceFound += ForwardPort;
 
             NatUtility.StartDiscovery();
         }
-
         private void ForwardPort(object sender, DeviceEventArgs args)
         {
             INatDevice device = args.Device;
+            var protocol = radioBtnTCP.Checked ? Protocol.Tcp : Protocol.Udp;
 
-            device.CreatePortMap(new Mapping(Protocol.Tcp, Port, Port));
+            device.CreatePortMap(new Mapping(protocol, targetPort, targetPort));
 
-            MessageBox.Show(Port + ". Port Forwarded To This Local Device!");
+            MessageBox.Show(targetPort + ". Port Forwarded To This Local Device!");
 
             NatUtility.DeviceFound -= ForwardPort;
         }
 
 
-
+        // Deletes forwarded port map.
         private void btnDeleteForward_Click(object sender, EventArgs e)
         {
-            string PortText = txtPort2.Text.Trim();
+            string portText = txtPort.Text.Trim();
 
-            if (!Int32.TryParse(PortText, out _)) return;
-
-            Port = Convert.ToInt32(PortText);
+            if (!int.TryParse(portText, out targetPort)) return;
 
             NatUtility.DeviceFound += DeleteForwardedPort;
 
             NatUtility.StartDiscovery();
         }
-
         private void DeleteForwardedPort(object sender, DeviceEventArgs args)
         {
             INatDevice device = args.Device;
+            var protocol = radioBtnTCP.Checked ? Protocol.Tcp : Protocol.Udp;
 
-            device.DeletePortMap(new Mapping(Protocol.Tcp, Port, Port));
+            device.DeletePortMap(new Mapping(protocol, targetPort, targetPort));
 
-            MessageBox.Show(Port + ". Forwarded Port Has Been Deleted!");
+            MessageBox.Show(targetPort + ". Forwarded Port Has Been Deleted!");
 
             NatUtility.DeviceFound -= DeleteForwardedPort;
         }
-
 
     }
 }
