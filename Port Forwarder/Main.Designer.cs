@@ -1,7 +1,7 @@
 ﻿
 namespace Port_Forwarder
 {
-    partial class Form1
+    partial class Main
     {
         /// <summary>
         ///Gerekli tasarımcı değişkeni.
@@ -29,7 +29,7 @@ namespace Port_Forwarder
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.txtPort = new System.Windows.Forms.TextBox();
             this.btnForward = new System.Windows.Forms.Button();
             this.btnDeleteForward = new System.Windows.Forms.Button();
