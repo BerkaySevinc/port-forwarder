@@ -21,5 +21,5 @@ The user is fully responsible for how the software is used.</br>
 The author is not responsible for any misuse, damages, or violations caused by the use of this software.
 </br></br>
 
-# Medias
+# Media
 ![Screenshot 1](Introduction%20Media/Screenshot%201.png)
